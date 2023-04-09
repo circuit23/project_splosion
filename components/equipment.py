@@ -72,7 +72,7 @@ class Equipment(BaseComponent):
 
         setattr(self, slot, None)
 
-    def toggle_unequip(self, equippable_item: Item, add_message: bool = True) -> None:
+    def toggle_equip(self, equippable_item: Item, add_message: bool = True) -> None:
         if (
             equippable_item.equippable
             and equippable_item.equippable.equipment_type == EquipmentType.WEAPON
