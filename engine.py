@@ -17,6 +17,7 @@ if TYPE_CHECKING:
 
 
 class Engine:
+    game_map: GameMap
     def __init__(self, player: Actor):
         self.event_handler: EventHandler = MainGameEventHandler(self)
         self.message_log = MessageLog()
