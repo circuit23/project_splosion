@@ -21,8 +21,13 @@ def main() -> None:
     screen_height = 50
 
     tileset = tcod.tileset.load_tilesheet(
-        "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
+        "TiledFont.png", 32, 10, tcod.tileset.CHARMAP_TCOD
     )
+    tileset.remap(0x40, 2, 5)  # Remap '@' to a character sprite
+    # TODO: remap Orcs' 'o' to (3, 5) without overwriting other 'o's
+    # TODO: remap Trolls' 'o' to (3, 5) without overwriting other 'T's
+    # TODO: same for swords, armor, downstairs, potions, scrolls, etc
+    # TODO: really, figure out how to call those specific things by codepoint instead(?)
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 
