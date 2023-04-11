@@ -23,10 +23,11 @@ def main() -> None:
     tileset = tcod.tileset.load_tilesheet(
         "TiledFont.png", 32, 10, tcod.tileset.CHARMAP_TCOD
     )
-    tileset.remap(ord("@"), 2, 5)  # Remap '@' to a character sprite
+    tileset.remap(0x100000, 2, 5)  # Assign codepoint 0x100000 to a character sprite
 
-    # TODO: instead of remapping all the characters in a sloppy way, add codepoints a la 0x40 to the Entity instances
-    # TODO: and also then the entries in entity_factories, plus everywhere else it'll need refactored in
+    # TODO: remap codepoints to relevant locations as above
+    # TODO: change handling of walls and floors so this works with them too
+    # TODO: then just change characters in entity_factories to point to the codepoints (see 'player' factory)
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 

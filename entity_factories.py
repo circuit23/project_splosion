@@ -7,7 +7,8 @@ from components.level import Level
 from entity import Actor, Item
 
 player = Actor(
-    char="@",
+    char=chr(0x100000),  # Map codepoint to the character sprite and use this instead of '@'
+    # char="@",
     color=(255, 255, 255),
     name="Player",
     ai_cls=HostileEnemy,
