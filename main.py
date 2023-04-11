@@ -23,11 +23,10 @@ def main() -> None:
     tileset = tcod.tileset.load_tilesheet(
         "TiledFont.png", 32, 10, tcod.tileset.CHARMAP_TCOD
     )
-    tileset.remap(0x40, 2, 5)  # Remap '@' to a character sprite
-    # TODO: remap Orcs' 'o' to (3, 5) without overwriting other 'o's
-    # TODO: remap Trolls' 'o' to (3, 5) without overwriting other 'T's
-    # TODO: same for swords, armor, downstairs, potions, scrolls, etc
-    # TODO: really, figure out how to call those specific things by codepoint instead(?)
+    tileset.remap(ord("@"), 2, 5)  # Remap '@' to a character sprite
+
+    # TODO: instead of remapping all the characters in a sloppy way, add codepoints a la 0x40 to the Entity instances
+    # TODO: and also then the entries in entity_factories, plus everywhere else it'll need refactored in
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 
