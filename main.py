@@ -38,6 +38,8 @@ def main() -> None:
     # TODO: put tileset stuff in better place (maybe components?) instead of main
     # TODO: figure out FOV/visible vs explored tweaks now that i'm using the new sprites
     # TODO: make the console area resizable like in the scratch example
+    # TODO: make a Rexpaint charset/spriteset that's better
+    # TODO: pretty sure i can do the spriteset in greyscale like the Cogmind guy, then color them like fonts?
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 
