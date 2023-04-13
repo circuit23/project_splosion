@@ -191,7 +191,7 @@ def generate_dungeon(
 
         if len(rooms) == 0:
             # The first room, where the player starts.
-            player.place(*new_room.center, dungeon)
+            player.place(*new_room.center, gamemap=dungeon)
         else:  # All rooms after the first.
             for x, y in tunnel_between(rooms[-1].center, new_room.center):
                 dungeon.tiles[x, y] = tile_types.floor
@@ -205,5 +205,28 @@ def generate_dungeon(
 
         # Finally, append the new room to the list.
         rooms.append(new_room)
+
+    return dungeon
+
+
+def generate_arena(
+        map_width: int,
+        map_height: int,
+        engine: Engine,
+) -> GameMap:
+    """Generate an arena for testing."""
+    player = engine.player
+    dungeon = GameMap(engine, map_width, map_height, entities=[player])
+
+    rooms: List[RectangularRoom] = []
+
+    # Build out the arena as a Rectangular Room to take advantage of the other features
+    new_room = RectangularRoom(0, 0, dungeon.width - 1, dungeon.height - 1)
+    dungeon.tiles[new_room.inner] = tile_types.floor
+
+    player.place(*new_room.center, gamemap=dungeon)
+    place_entities(new_room, dungeon, engine.game_world.current_floor)
+
+    rooms.append(new_room)
 
     return dungeon

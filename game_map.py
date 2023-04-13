@@ -137,3 +137,12 @@ class GameWorld:
             map_height=self.map_height,
             engine=self.engine,
         )
+
+    def generate_arena_floor(self) -> None:
+        from procgen import generate_arena
+
+        self.engine.game_map = generate_arena(
+            map_width=self.map_width,
+            map_height=self.map_height,
+            engine=self.engine,
+        )

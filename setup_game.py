@@ -19,6 +19,40 @@ import input_handlers
 background_image = tcod.image.load("menu_background.png")[:, :, :3]
 
 
+def arena_game() -> Engine:
+    """Return an arena session as an Engine instance."""
+    map_width = 80
+    map_height = 43
+
+    # Leave in useless numbers so they don't cause errors
+    # TODO: solve this problem
+    room_max_size = 80
+    room_min_size = 6
+    max_rooms = 30
+
+    player = copy.deepcopy(entity_factories.player)
+
+    engine = Engine(player=player)
+
+    engine.game_world = GameWorld(
+        engine=engine,
+        max_rooms=max_rooms,
+        room_min_size=room_min_size,
+        room_max_size=room_max_size,
+        map_width=map_width,
+        map_height=map_height,
+    )
+
+    engine.game_world.generate_arena_floor()
+    engine.update_fov(radius=80)
+
+    engine.message_log.add_message(
+        "Welcome to the Arena! Prepare to die in a splosion!!", color.welcome_text
+    )
+
+    return engine
+
+
 def new_game() -> Engine:
     """Return a brand new game session as an Engine instance."""
     map_width = 80
@@ -95,7 +129,7 @@ class MainMenu(input_handlers.BaseEventHandler):
 
         menu_width = 24
         for i, text in enumerate(
-            ["[N] Play a new game", "[C] Continue last game", "[Q] Quit"]
+            ["[N] Play a new game", "[C] Continue last game", "[A] Arena for testing", "[Q] Quit"]
         ):
             console.print(
                 console.width // 2,
@@ -122,5 +156,7 @@ class MainMenu(input_handlers.BaseEventHandler):
                 return input_handlers.PopupMessage(self, f"Failed to load save:\n{exc}")
         elif event.sym == tcod.event.K_n:
             return input_handlers.MainGameEventHandler(new_game())
+        elif event.sym == tcod.event.K_a:
+            return input_handlers.MainGameEventHandler(arena_game())
 
         return None

@@ -7,7 +7,7 @@ def tile_set():
     :return:
     """
     tileset = tcod.tileset.load_tilesheet(
-        "cp437_20x20.png", 16, 16, tcod.tileset.CHARMAP_CP437
+        "cp437_16x16.png", 16, 16, tcod.tileset.CHARMAP_CP437
     )
     # follow the format of these old codepoint assignments to use new ones
     # tileset.remap(0x100000, 2, 5)  # Assign codepoint 0x100000 to a character sprite
