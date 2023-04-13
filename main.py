@@ -3,6 +3,7 @@ import traceback
 
 import tcod
 
+from components.tileset import tile_set
 import color
 import exceptions
 import input_handlers
@@ -15,31 +16,18 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         handler.engine.save_as(filename)
         print("Game saved.")
 
+# TODO: put a flag somewhere to use codepoints or ASCII
+# TODO: manage the floor/wall codepoints- they got removed
+# TODO: switch to REXPaint tileset for consistency
+# TODO: make the console area resizable like in the scratch example
+# TODO: bigger, scrollable/lookable GameMaps
+
 
 def main() -> None:
     screen_width = 80
     screen_height = 50
 
-    tileset = tcod.tileset.load_tilesheet(
-        "TiledFont.png", 32, 10, tcod.tileset.CHARMAP_TCOD
-    )
-    tileset.remap(0x100000, 2, 5)  # Assign codepoint 0x100000 to a character sprite
-    tileset.remap(0x100001, 3, 5)  # Orcs
-    tileset.remap(0x100002, 4, 5)  # Trolls
-    tileset.remap(0x100003, 5, 5)  # Scrolls
-    tileset.remap(0x100004, 6, 5)  # Potions
-    tileset.remap(0x100005, 7, 5)  # sword
-    tileset.remap(0x100008, 10, 5)  # dagger
-    tileset.remap(0x100006, 8, 5)  # armor
-    tileset.remap(0x100007, 9, 5)  # downstairs
-    tileset.remap(0x100009, 0, 5)  # wall
-    tileset.remap(0x100010, 1, 5)  # floor
-
-    # TODO: put tileset stuff in better place (maybe components?) instead of main
-    # TODO: figure out FOV/visible vs explored tweaks now that i'm using the new sprites
-    # TODO: make the console area resizable like in the scratch example
-    # TODO: make a Rexpaint charset/spriteset that's better
-    # TODO: pretty sure i can do the spriteset in greyscale like the Cogmind guy, then color them like fonts?
+    tileset = tile_set()
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 

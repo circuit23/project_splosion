@@ -31,6 +31,7 @@ class Entity:
                  x: int = 0,
                  y: int = 0,
                  char: str = "?",
+                 codepoint: Optional[str] = "?",
                  color: Tuple[int, int, int] = (255, 255, 255),
                  name: str = "<Unnamed>",
                  blocks_movement: bool = False,
@@ -39,6 +40,7 @@ class Entity:
         self.x = x
         self.y = y
         self.char = char
+        self.codepoint = codepoint
         self.color = color
         self.name = name
         self.blocks_movement = blocks_movement
@@ -90,6 +92,7 @@ class Actor(Entity):
             x: int = 0,
             y: int = 0,
             char: str = "?",
+            codepoint: Optional[str] = "?",
             color: Tuple[int, int, int] = (255, 255, 255),
             name: str = "<Unnamed>",
             ai_cls: Type[BaseAI],
@@ -102,6 +105,7 @@ class Actor(Entity):
             x=x,
             y=y,
             char=char,
+            codepoint=codepoint,
             color=color,
             name=name,
             blocks_movement=True,
@@ -135,6 +139,7 @@ class Item(Entity):
             x: int = 0,
             y: int = 0,
             char: str = "?",
+            codepoint: Optional[str] = "?",
             color: Tuple[int, int, int] = (255, 255, 255),
             name: str = "<Unnamed>",
             consumable: Optional[Consumable] = None,
@@ -144,6 +149,7 @@ class Item(Entity):
             x=x,
             y=y,
             char=char,
+            codepoint=codepoint,
             color=color,
             name=name,
             blocks_movement=False,
