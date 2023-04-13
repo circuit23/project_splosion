@@ -16,11 +16,10 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         handler.engine.save_as(filename)
         print("Game saved.")
 
-# TODO: put a flag somewhere to use codepoints or ASCII
-# TODO: manage the floor/wall codepoints- they got removed
-# TODO: switch to REXPaint tileset for consistency
 # TODO: make the console area resizable like in the scratch example
 # TODO: bigger, scrollable/lookable GameMaps
+# TODO: put a flag somewhere to use codepoints or ASCII
+# TODO: manage the floor/wall codepoints- they got removed
 
 
 def main() -> None:
