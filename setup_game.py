@@ -25,7 +25,6 @@ def arena_game() -> Engine:
     map_height = 43
 
     # Leave in useless numbers so they don't cause errors
-    # TODO: solve this problem
     room_max_size = 80
     room_min_size = 6
     max_rooms = 30
@@ -157,6 +156,6 @@ class MainMenu(input_handlers.BaseEventHandler):
         elif event.sym == tcod.event.K_n:
             return input_handlers.MainGameEventHandler(new_game())
         elif event.sym == tcod.event.K_a:
-            return input_handlers.MainGameEventHandler(arena_game())
+            return input_handlers.ArenaEventHandler(arena_game())
 
         return None

@@ -17,7 +17,6 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         print("Game saved.")
 
 # TODO: implement the beginnings of the magic system!!!
-# TODO: create test environment to see how shit looks and works easily
 # TODO: once some spells are working, start ASCII animations
 # TODO: make the console area resizable like in the scratch example
 # TODO: bigger, scrollable/lookable GameMaps

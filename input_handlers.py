@@ -555,6 +555,42 @@ class MainGameEventHandler(EventHandler):
         return action
 
 
+class ArenaEventHandler(MainGameEventHandler):
+    def handle_events(self, event: tcod.event.Event) -> BaseEventHandler:
+        """Handle events for input handlers with an engine."""
+        action_or_state = self.dispatch(event)
+        if isinstance(action_or_state, BaseEventHandler):
+            return action_or_state
+        if self.handle_action(action_or_state):
+            # A valid action was performed.
+            if not self.engine.player.is_alive:
+                # The player was killed some time during or after the action.
+                return GameOverEventHandler(self.engine)
+            elif self.engine.player.level.requires_level_up:
+                return LevelUpEventHandler(self.engine)
+            return ArenaEventHandler(self.engine)  # Return to the arena handler.
+        return self
+
+    def handle_action(self, action: Optional[Action]) -> bool:
+        """Handle actions returned from event methods.
+
+        Returns True if the action will advance a turn.
+        """
+        if action is None:
+            return False
+
+        try:
+            action.perform()
+        except exceptions.Impossible as exc:
+            self.engine.message_log.add_message(exc.args[0], color.impossible)
+            return False  # Skip enemy turn on exceptions
+
+        self.engine.handle_enemy_turns()
+
+        self.engine.update_fov(radius=80)
+        return True
+
+
 class GameOverEventHandler(EventHandler):
     def on_quit(self) -> None:
         """Handle exiting out of a finished game."""
