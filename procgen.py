@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import random
 from typing import Dict, Iterator, List, Tuple, TYPE_CHECKING
 
@@ -216,7 +217,8 @@ def generate_arena(
 ) -> GameMap:
     """Generate an arena for testing."""
     player = engine.player
-    dungeon = GameMap(engine, map_width, map_height, entities=[player])
+    target_dummy = copy.deepcopy(entity_factories.target_dummy)
+    dungeon = GameMap(engine, map_width, map_height, entities=[player, target_dummy])
 
     rooms: List[RectangularRoom] = []
 
@@ -224,7 +226,8 @@ def generate_arena(
     new_room = RectangularRoom(0, 0, dungeon.width - 1, dungeon.height - 1)
     dungeon.tiles[new_room.inner] = tile_types.floor
 
-    player.place(*new_room.center, gamemap=dungeon)
+    player.place(map_width // 2, map_height - 3, gamemap=dungeon)
+    target_dummy.place(map_width // 2, 4, gamemap=dungeon)
     place_entities(new_room, dungeon, engine.game_world.current_floor)
 
     rooms.append(new_room)
