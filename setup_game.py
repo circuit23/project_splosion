@@ -29,6 +29,8 @@ def arena_game() -> Engine:
     room_min_size = 6
     max_rooms = 30
 
+    fov_radius: int = 80
+
     player = copy.deepcopy(entity_factories.player)
 
     engine = Engine(player=player)
@@ -40,10 +42,11 @@ def arena_game() -> Engine:
         room_max_size=room_max_size,
         map_width=map_width,
         map_height=map_height,
+        fov_radius=fov_radius,
     )
 
     engine.game_world.generate_arena_floor()
-    engine.update_fov(radius=80)
+    engine.update_fov(fov_radius)
 
     engine.message_log.add_message(
         "Welcome to the Arena! Prepare to die in a splosion!!", color.welcome_text

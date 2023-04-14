@@ -16,8 +16,6 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         handler.engine.save_as(filename)
         print("Game saved.")
 
-# TODO: pass the event handler in to input_handlers (for example AskUserEventHandler.on_exit() should get passed the
-#  correct ArenaEventHandler instead of defaulting to MainGameEventHandler
 # TODO: give the Arena its own savegame so it doesn't keep overwriting the other one
 # TODO: create a spell book handler like the inventory handler
 # TODO: create an item factory system similar to entity_factory

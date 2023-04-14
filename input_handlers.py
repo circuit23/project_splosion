@@ -151,7 +151,7 @@ class EventHandler(BaseEventHandler):
 
         self.engine.handle_enemy_turns()
 
-        self.engine.update_fov()
+        self.engine.update_fov(self.engine.game_world.fov_radius)
         return True
 
     def ev_mousemotion(self, event: tcod.event.MouseMotion) -> None:
@@ -587,7 +587,7 @@ class ArenaEventHandler(MainGameEventHandler):
 
         self.engine.handle_enemy_turns()
 
-        self.engine.update_fov(radius=80)
+        self.engine.update_fov(self.engine.game_world.fov_radius)
         return True
 
 

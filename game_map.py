@@ -110,6 +110,7 @@ class GameWorld:
             max_rooms: int,
             room_min_size: int,
             room_max_size: int,
+            fov_radius: int = 8,
             current_floor: int = 0,
     ):
         self.engine = engine
@@ -121,6 +122,8 @@ class GameWorld:
 
         self.room_min_size = room_min_size
         self.room_max_size = room_max_size
+
+        self.fov_radius = fov_radius
 
         self.current_floor = current_floor
 
