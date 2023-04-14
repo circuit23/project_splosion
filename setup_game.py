@@ -16,7 +16,7 @@ from game_map import GameWorld
 import input_handlers
 
 # Load the background image and remove the alpha channel.
-background_image = tcod.image.load("menu_background.png")[:, :, :3]
+background_image = tcod.image.load("Project_Splosion_small.png")[:, :, :3]
 
 
 def arena_game() -> Engine:
@@ -115,14 +115,14 @@ class MainMenu(input_handlers.BaseEventHandler):
         console.draw_semigraphics(background_image, 0, 0)
 
         console.print(
-            console.width // 2,
-            console.height // 2 - 4,
+            console.width // 4 * 3,
+            console.height // 2 - 20,
             "PROJECT SPLOSION!",
             fg=color.menu_title,
             alignment=tcod.CENTER,
         )
         console.print(
-            console.width // 2,
+            console.width - 8,
             console.height - 2,
             "By Circuit 23",
             fg=color.menu_title,
@@ -134,8 +134,8 @@ class MainMenu(input_handlers.BaseEventHandler):
             ["[N] Play a new game", "[C] Continue last game", "[A] Arena for testing", "[Q] Quit"]
         ):
             console.print(
-                console.width // 2,
-                console.height // 2 - 2 + i,
+                console.width // 4 * 3,
+                console.height // 2 - 18 + i,
                 text.ljust(menu_width),
                 fg=color.menu_text,
                 bg=color.black,

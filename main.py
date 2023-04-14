@@ -25,6 +25,7 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
 # TODO: bigger, scrollable/lookable GameMaps
 # TODO: put a flag somewhere to use codepoints or ASCII
 # TODO: manage the floor/wall codepoints- they got removed
+# TODO: figure out how to make the loading screen look like it really looks full-size
 
 
 def main() -> None:
