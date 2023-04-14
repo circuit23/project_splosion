@@ -92,7 +92,7 @@ class SpellAction(Action):
     def perform(self) -> None:
         """Invoke the item's ability, this action will be given to provide context."""
         if self.spell.castable:
-            self.spell.castable.activate(self)
+            self.spell.castable.cast(self)
 
 
 class DropItem(ItemAction):

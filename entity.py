@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from components.fighter import Fighter
     from components.inventory import Inventory
     from components.level import Level
+    from components.spell_book import SpellBook
     from game_map import GameMap
 
 T = TypeVar("T", bound="Entity")
@@ -25,7 +26,7 @@ class Entity:
     A generic object to represent players, enemies, items, etc.
     """
 
-    parent: Union[GameMap, Inventory]
+    parent: Union[GameMap, Inventory, SpellBook]
 
     def __init__(self,
                  parent: Optional[GameMap] = None,
@@ -100,6 +101,7 @@ class Actor(Entity):
             equipment: Equipment,
             fighter: Fighter,
             inventory: Inventory,
+            spell_book: SpellBook,
             level: Level,
     ):
         super().__init__(
@@ -123,6 +125,9 @@ class Actor(Entity):
 
         self.inventory = inventory
         self.inventory.parent = self
+
+        self.spell_book = spell_book
+        self.spell_book.parent = self
 
         self.level = level
         self.level.parent = self
