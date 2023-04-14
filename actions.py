@@ -7,7 +7,7 @@ import exceptions
 
 if TYPE_CHECKING:
     from engine import Engine
-    from entity import Actor, Entity, Item
+    from entity import Actor, Entity, Item, Spell
 
 
 class Action:
@@ -77,6 +77,22 @@ class ItemAction(Action):
         """Invoke the item's ability, this action will be given to provide context."""
         if self.item.consumable:
             self.item.consumable.activate(self)
+
+
+class SpellAction(Action):
+    def __init__(
+            self, entity: Actor, spell: Spell, target_xy: Optional[Tuple[int, int]] = None
+    ):
+        super().__init__(entity)
+        self.spell = spell
+        if not target_xy:
+            target_xy = entity.x, entity.y
+        self.target_xy = target_xy
+
+    def perform(self) -> None:
+        """Invoke the item's ability, this action will be given to provide context."""
+        if self.spell.castable:
+            self.spell.castable.activate(self)
 
 
 class DropItem(ItemAction):
