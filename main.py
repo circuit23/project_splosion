@@ -16,16 +16,14 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         handler.engine.save_as(filename)
         print("Game saved.")
 
-# TODO: give the Arena its own savegame so it doesn't keep overwriting the other one
 # TODO: create a spell book handler like the inventory handler
 # TODO: create an item factory system similar to entity_factory
 # TODO: create an ELABORATE spell factory system similar to entity_factory
 # TODO: once some spells are working, start ASCII animations
+# TODO: figure out how to make the loading screen look like it really looks full-size
+# TODO: give the Arena its own savegame so it doesn't keep overwriting the other one
 # TODO: make the console area resizable like in the scratch example
 # TODO: bigger, scrollable/lookable GameMaps
-# TODO: put a flag somewhere to use codepoints or ASCII
-# TODO: manage the floor/wall codepoints- they got removed
-# TODO: figure out how to make the loading screen look like it really looks full-size
 
 
 def main() -> None:
