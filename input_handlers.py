@@ -406,7 +406,7 @@ class InventoryDropHandler(InventoryEventHandler):
 
 
 class SpellbookEventHandler(AskUserEventHandler):
-    # TODO: code up a spellbook interface similar to inventory
+    # TODO: code up a spellbook interface similar to InventoryEventHandler
     pass
 
 class SelectIndexHandler(AskUserEventHandler):
