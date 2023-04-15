@@ -405,6 +405,10 @@ class InventoryDropHandler(InventoryEventHandler):
         return actions.DropItem(self.engine.player, item)
 
 
+class SpellbookEventHandler(AskUserEventHandler):
+    # TODO: code up a spellbook interface similar to inventory
+    pass
+
 class SelectIndexHandler(AskUserEventHandler):
     """Handles asking the user for an index on the map."""
 
