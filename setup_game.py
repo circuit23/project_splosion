@@ -10,6 +10,7 @@ from typing import Optional
 import tcod
 
 import color
+import spell_factory
 from engine import Engine
 import entity_factories
 from game_map import GameWorld
@@ -54,15 +55,19 @@ def arena_game() -> Engine:
 
     dagger = copy.deepcopy(entity_factories.dagger)
     leather_armor = copy.deepcopy(entity_factories.leather_armor)
+    basic_spell = copy.deepcopy(spell_factory.basic_spell)
 
     dagger.parent = player.inventory
     leather_armor.parent = player.inventory
+    basic_spell.parent = player.spell_book
 
     player.inventory.items.append(dagger)
     player.equipment.toggle_equip(dagger, add_message=False)
 
     player.inventory.items.append(leather_armor)
     player.equipment.toggle_equip(leather_armor, add_message=False)
+
+    player.spell_book.spells.append(basic_spell)
 
     return engine
 

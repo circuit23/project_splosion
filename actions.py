@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, TYPE_CHECKING
+from typing import Optional, Tuple, TYPE_CHECKING, Union
 
 import color
 import exceptions
@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Action:
-    def __init__(self, entity: Actor):
+    def __init__(self, entity: Union[Actor | Spell]):
         super().__init__()
         self.entity = entity
 
@@ -88,6 +88,11 @@ class SpellAction(Action):
         if not target_xy:
             target_xy = entity.x, entity.y
         self.target_xy = target_xy
+
+    @property
+    def target_actor(self) -> Optional[Actor]:
+        """Return the actor at this spell's destination."""
+        return self.engine.game_map.get_actor_at_location(*self.target_xy)
 
     def perform(self) -> None:
         """Invoke the item's ability, this action will be given to provide context."""

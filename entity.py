@@ -179,9 +179,12 @@ class Spell(Entity):
             y: int = 0,
             char: str = "?",
             codepoint: Optional[str] = "?",
+            ai_cls: Type[BaseAI],
             color: Tuple[int, int, int] = (255, 255, 255),
             name: str = "<Unnamed>",
-            castable: Optional[Castable] = None,
+            castable: Castable,
+            spell_book: Optional[SpellBook] = None,
+            spell_power: int = 0,
     ):
         super().__init__(
             x=x,
@@ -194,6 +197,10 @@ class Spell(Entity):
             render_order=RenderOrder.ITEM,
         )
 
+        self.ai: Optional[BaseAI] = ai_cls(self)
         self.castable = castable
         if self.castable:
             self.castable.parent = self
+        self.power = spell_power
+
+
