@@ -4,7 +4,6 @@ import tcod
 def tile_set():
     """
     Set up the tile set, and whether to use sprites.
-    :return:
     """
     tileset = tcod.tileset.load_tilesheet(
         "cp437_16x16.png", 16, 16, tcod.tileset.CHARMAP_CP437
