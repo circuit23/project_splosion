@@ -19,7 +19,7 @@ import exceptions
 
 if TYPE_CHECKING:
     from engine import Engine
-    from entity import Item
+    from entity import Item, Spell
 
 
 MOVE_KEYS = {
@@ -406,8 +406,94 @@ class InventoryDropHandler(InventoryEventHandler):
 
 
 class SpellbookEventHandler(AskUserEventHandler):
-    # TODO: code up a spellbook interface similar to InventoryEventHandler
-    pass
+    """This handler lets the user select a spell.
+
+    What happens then depends on the spell's type, etc."""
+
+    TITLE = "<missing title>"
+
+    def on_render(self, console: tcod.Console) -> None:
+        """Render a spellbook menu, which displays the items in the spellbook, and the letter to select them.
+        Will move to a different position based on where the player is located, so the player can always see where
+        they are.
+        """
+        super().on_render(console)
+        number_of_spells_in_spellbook = len(self.engine.player.spell_book.spells)
+
+        height = number_of_spells_in_spellbook + 2
+
+        if height <= 3:
+            height = 3
+
+        if self.engine.player.x <= 30:
+            x = 40
+        else:
+            x = 0
+
+        y = 0
+
+        width = len(self.TITLE) + 4
+
+        console.draw_frame(
+            x=x,
+            y=y,
+            width=width,
+            height=height,
+            title=self.TITLE,
+            clear=True,
+            fg=(255, 255, 255),
+            bg=(0, 0, 0),
+        )
+
+        if number_of_spells_in_spellbook > 0:
+            for i, spell in enumerate(self.engine.player.spell_book.spells):
+                spell_key = chr(ord("a") + i)
+
+                item_string = f"({spell_key}) {spell.name}"
+
+                console.print(x + 1, y + i + 1, item_string)
+        else:
+            console.print(x + 1, y + 1, "(Empty)")
+
+    def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
+        player = self.engine.player
+        key = event.sym
+        index = key - tcod.event.K_a
+
+        if 0 <= index <= 26:
+            try:
+                selected_spell = player.spell_book.spells[index]
+            except IndexError:
+                self.engine.message_log.add_message("Invalid entry.", color.invalid)
+                return None
+            return self.on_spell_selected(selected_spell)
+        return super().ev_keydown(event)
+
+    def on_spell_selected(self, spell: Spell) -> Optional[ActionOrHandler]:
+        """Called when the user selects a valid spell."""
+        raise NotImplementedError()
+
+
+class SpellbookCastHandler(SpellbookEventHandler):
+    """Handle casting a spell."""
+    TITLE = "Select a spell to cast"
+
+    def on_spell_selected(self, spell: Spell) -> Optional[ActionOrHandler]:
+        if spell.castable:
+            # Return the action for the selected spell
+            return spell.castable.get_action(self.engine.player)
+        else:
+            return None
+
+
+class SpellbookRemoveHandler(SpellbookEventHandler):
+    """Handle removing a spell from the spellbook."""
+    TITLE = "Select a spell to remove."
+
+    def on_spell_selected(self, spell: Spell) -> Optional[ActionOrHandler]:
+        """Remove this spell."""
+        return actions.RemoveSpell(self.engine.player, spell)
+
 
 class SelectIndexHandler(AskUserEventHandler):
     """Handles asking the user for an index on the map."""
@@ -550,6 +636,8 @@ class MainGameEventHandler(EventHandler):
             return InventoryActivateHandler(self.engine)
         elif key == tcod.event.K_d:
             return InventoryDropHandler(self.engine)
+        elif key == tcod.event.K_s:
+            return SpellbookCastHandler(self.engine)
         elif key == tcod.event.K_c:
             return CharacterScreenEventHandler(self.engine)
         elif key == tcod.event.K_SLASH:

@@ -67,7 +67,8 @@ class BasicSpell(Castable):
             raise Impossible("You must cast the spell within its range.")
 
         self.engine.message_log.add_message(
-            f"You cast the basic spell at the {target.name}. A bolt of pure magic streaks out at them!",
+            # TODO: make this adjust based on mhat you're casting, etc
+            f"You send a bolt of pure magic at the {target.name}, for {self.spell_power} damage.",
             color.status_effect_applied
         )
         target.fighter.hp -= self.spell_power
