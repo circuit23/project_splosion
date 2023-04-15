@@ -184,7 +184,6 @@ class Spell(Entity):
             name: str = "<Unnamed>",
             castable: Castable,
             spell_book: Optional[SpellBook] = None,
-            spell_power: int = 0,
     ):
         super().__init__(
             x=x,
@@ -201,6 +200,6 @@ class Spell(Entity):
         self.castable = castable
         if self.castable:
             self.castable.parent = self
-        self.power = spell_power
-
-
+            self.spell_book = spell_book
+            self.spell_power = self.castable.spell_power
+            self.spell_range = self.castable.spell_range
