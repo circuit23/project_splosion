@@ -638,6 +638,8 @@ class MainGameEventHandler(EventHandler):
             return InventoryDropHandler(self.engine)
         elif key == tcod.event.K_s:
             return SpellbookCastHandler(self.engine)
+        elif key == tcod.event.K_r:
+            return SpellbookRemoveHandler(self.engine)
         elif key == tcod.event.K_c:
             return CharacterScreenEventHandler(self.engine)
         elif key == tcod.event.K_SLASH:

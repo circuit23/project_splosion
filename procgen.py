@@ -226,7 +226,7 @@ def generate_arena(
     new_room = RectangularRoom(0, 0, dungeon.width - 1, dungeon.height - 1)
     dungeon.tiles[new_room.inner] = tile_types.floor
 
-    player.place(map_width // 2, map_height - 3, gamemap=dungeon)
+    player.place(map_width // 2, map_height // 2, gamemap=dungeon)
     target_dummy.place(map_width // 2, 4, gamemap=dungeon)
     place_entities(new_room, dungeon, engine.game_world.current_floor)
 
