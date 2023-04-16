@@ -481,9 +481,9 @@ class SpellbookCastHandler(SpellbookEventHandler):
     TITLE = "Select spell to cast/(r) for Remove."
 
     def on_spell_selected(self, spell: Spell) -> Optional[ActionOrHandler]:
-        if spell.castable:
+        if spell.spell_structure:
             # Return the action for the selected spell
-            return spell.castable.get_action(self.engine.player)
+            return spell.spell_structure.get_action(self.engine.player)
         else:
             return None
 

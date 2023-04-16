@@ -96,8 +96,8 @@ class SpellAction(Action):
 
     def perform(self) -> None:
         """Invoke the item's ability, this action will be given to provide context."""
-        if self.spell.castable:
-            self.spell.castable.cast(self)
+        if self.spell.spell_structure:
+            self.spell.spell_structure.cast(self)
 
 
 class RemoveSpell(SpellAction):

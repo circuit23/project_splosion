@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class SpellColor(BaseComponent):
-    parent: Spell
+    parent: Castable
 
     def __init__(self, color: Optional[str] = None):
         self.color = color

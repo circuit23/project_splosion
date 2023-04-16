@@ -8,7 +8,7 @@ from render_order import RenderOrder
 
 if TYPE_CHECKING:
     from components.ai import BaseAI
-    from components.castable import Castable
+    from components.castable import SpellStructure
     from components.consumable import Consumable
     from components.equipment import Equipment
     from components.equippable import Equippable
@@ -185,7 +185,7 @@ class Spell(Entity):
             ai_cls: Optional[Type[BaseAI]],
             color: Tuple[int, int, int] = (255, 255, 255),
             name: str = "<Unnamed>",
-            castable: Castable,
+            spell_structure: SpellStructure,
     ):
         super().__init__(
             x=x,
@@ -200,8 +200,8 @@ class Spell(Entity):
         )
 
         self.ai: Optional[BaseAI] = ai_cls
-        self.castable = castable
-        if self.castable:
-            self.castable.parent = self
-            self.spell_power = self.castable.spell_power
-            self.spell_range = self.castable.spell_range
+        self.spell_structure = spell_structure
+        if self.spell_structure:
+            self.spell_structure.parent = self
+            self.spell_power = self.spell_structure.spell_power
+            self.spell_range = self.spell_structure.spell_range
