@@ -9,6 +9,5 @@ basic_spell = Spell(
     color=(255, 255, 255),
     name="Basic Spell",
     ai_cls=SpellAI,
-    spell_book=SpellBook(capacity=26),
     castable=BasicSpell(spell_power=1, spell_range=4),
 )

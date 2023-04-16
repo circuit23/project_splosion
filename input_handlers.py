@@ -460,7 +460,9 @@ class SpellbookEventHandler(AskUserEventHandler):
         key = event.sym
         index = key - tcod.event.K_a
 
-        if 0 <= index <= 26:
+        if 0 <= index <= 20:
+            if key == tcod.event.K_r:
+                return SpellbookRemoveHandler(self.engine)
             try:
                 selected_spell = player.spell_book.spells[index]
             except IndexError:
@@ -476,7 +478,7 @@ class SpellbookEventHandler(AskUserEventHandler):
 
 class SpellbookCastHandler(SpellbookEventHandler):
     """Handle casting a spell."""
-    TITLE = "Select a spell to cast"
+    TITLE = "Select a spell to cast, or (r) for Remove."
 
     def on_spell_selected(self, spell: Spell) -> Optional[ActionOrHandler]:
         if spell.castable:
@@ -638,8 +640,6 @@ class MainGameEventHandler(EventHandler):
             return InventoryDropHandler(self.engine)
         elif key == tcod.event.K_s:
             return SpellbookCastHandler(self.engine)
-        elif key == tcod.event.K_r:
-            return SpellbookRemoveHandler(self.engine)
         elif key == tcod.event.K_c:
             return CharacterScreenEventHandler(self.engine)
         elif key == tcod.event.K_SLASH:

@@ -16,7 +16,6 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         handler.engine.save_as(filename)
         print("Game saved.")
 
-# TODO: create a spell book handler like the inventory handler
 # TODO: create an item factory system similar to entity_factory
 # TODO: create an ELABORATE spell factory system similar to entity_factory
 # TODO: once some spells are working, start ASCII animations

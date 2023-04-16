@@ -16,7 +16,7 @@ player = Actor(
     equipment=Equipment(),
     fighter=Fighter(hp=30, base_defense=1, base_power=2),
     inventory=Inventory(capacity=26),
-    spell_book=SpellBook(capacity=26),
+    spell_book=SpellBook(capacity=4),
     level=Level(level_up_base=200),
 )
 
@@ -29,7 +29,7 @@ orc = Actor(
     equipment=Equipment(),
     fighter=Fighter(hp=10, base_defense=0, base_power=3),
     inventory=Inventory(capacity=0),
-    spell_book=SpellBook(capacity=26),
+    spell_book=SpellBook(capacity=1),
     level=Level(xp_given=35),
 )
 troll = Actor(
@@ -41,7 +41,7 @@ troll = Actor(
     equipment=Equipment(),
     fighter=Fighter(hp=16, base_defense=1, base_power=4),
     inventory=Inventory(capacity=0),
-    spell_book=SpellBook(capacity=26),
+    spell_book=SpellBook(capacity=4),
     level=Level(xp_given=100),
 )
 target_dummy = Actor(
@@ -52,7 +52,7 @@ target_dummy = Actor(
     equipment=Equipment(),
     fighter=Fighter(hp=100, base_defense=1, base_power=0),
     inventory=Inventory(capacity=0),
-    spell_book=SpellBook(capacity=26),
+    spell_book=SpellBook(capacity=0),
     level=Level(xp_given=200),
 )
 

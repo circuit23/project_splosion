@@ -175,6 +175,7 @@ class Spell(Entity):
     def __init__(
             self,
             *,
+            parent: Optional[SpellBook] = None,
             x: int = 0,
             y: int = 0,
             char: str = "?",
@@ -183,7 +184,6 @@ class Spell(Entity):
             color: Tuple[int, int, int] = (255, 255, 255),
             name: str = "<Unnamed>",
             castable: Castable,
-            spell_book: Optional[SpellBook] = None,
     ):
         super().__init__(
             x=x,
@@ -194,12 +194,12 @@ class Spell(Entity):
             name=name,
             blocks_movement=False,
             render_order=RenderOrder.ITEM,
+            parent=parent,
         )
 
         self.ai: Optional[BaseAI] = ai_cls(self)
         self.castable = castable
         if self.castable:
             self.castable.parent = self
-            self.spell_book = spell_book
             self.spell_power = self.castable.spell_power
             self.spell_range = self.castable.spell_range
