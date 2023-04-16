@@ -172,6 +172,8 @@ class Item(Entity):
 
 
 class Spell(Entity):
+    parent: SpellBook
+
     def __init__(
             self,
             *,
@@ -180,7 +182,7 @@ class Spell(Entity):
             y: int = 0,
             char: str = "?",
             codepoint: Optional[str] = "?",
-            ai_cls: Type[BaseAI],
+            ai_cls: Optional[Type[BaseAI]],
             color: Tuple[int, int, int] = (255, 255, 255),
             name: str = "<Unnamed>",
             castable: Castable,
@@ -197,7 +199,7 @@ class Spell(Entity):
             parent=parent,
         )
 
-        self.ai: Optional[BaseAI] = ai_cls(self)
+        self.ai: Optional[BaseAI] = ai_cls
         self.castable = castable
         if self.castable:
             self.castable.parent = self
