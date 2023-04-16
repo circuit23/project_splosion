@@ -17,7 +17,7 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
         print("Game saved.")
 
 # TODO: create an item factory system similar to entity_factory
-# TODO: create an ELABORATE spell factory system similar to entity_factory
+# TODO: create an ELABORATE spell factory system similar to entity_factory, with colors, etc
 # TODO: once some spells are working, start ASCII animations
 # TODO: figure out how to make the loading screen look like it really looks full-size
 # TODO: give the Arena its own savegame so it doesn't keep overwriting the other one

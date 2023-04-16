@@ -478,7 +478,7 @@ class SpellbookEventHandler(AskUserEventHandler):
 
 class SpellbookCastHandler(SpellbookEventHandler):
     """Handle casting a spell."""
-    TITLE = "Select a spell to cast, or (r) for Remove."
+    TITLE = "Select spell to cast/(r) for Remove."
 
     def on_spell_selected(self, spell: Spell) -> Optional[ActionOrHandler]:
         if spell.castable:

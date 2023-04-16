@@ -1,7 +1,6 @@
 from components.ai import SpellAI
-from components.castable import BasicSpell, Castable
-from components.spell_book import SpellBook
-from entity import Actor, Spell
+from components.castable import BasicSpell
+from entity import Spell
 
 basic_spell = Spell(
     char="*",
