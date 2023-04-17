@@ -49,7 +49,7 @@ class BaseAI(Action):
     def get_line_to(self, dest_x: int, dest_y: int) -> List[Tuple[int, int]]:
         """Compute a Bresenham line from self to the target and return a list of coordinates."""
         # TODO: i'm sure there's a better way to do this than just using an array filled with ones
-       # Compute the path to the destination and remove the starting point.
+        # Compute the path to the destination and remove the starting point.
         path: List[List[int]] = tcod.los.bresenham((self.entity.x, self.entity.y), (dest_x, dest_y)).tolist()
 
         # Convert from List[List[int]] to List[Tuple[int, int]].

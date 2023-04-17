@@ -579,7 +579,11 @@ class SingleRangedAttackHandler(SelectIndexHandler):
         # Take off the final position, aka the target, which got highlighted above.
         visible_array = np.array(self.engine.player.gamemap.visible, dtype=np.int8)
         for tp_x, tp_y in targeting_path[:-1]:
-            if visible_array[tp_x + 1, tp_y + 1]:  # Plus 1 to make the red start at the wall
+            if (
+                    visible_array[tp_x, tp_y]
+                    and self.engine.game_map.in_bounds(tp_x, tp_y)
+                    and not self.engine.game_map.get_blocking_entity_at_location(tp_x, tp_y)
+            ):
                 console.tiles_rgb["bg"][tp_x, tp_y] = colors.light_blue
                 console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
             else:
