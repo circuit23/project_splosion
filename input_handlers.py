@@ -577,9 +577,14 @@ class SingleRangedAttackHandler(SelectIndexHandler):
         console.tiles_rgb["fg"][x, y] = colors.black
         targeting_path = self.engine.player.ai.get_line_to(x, y)
         # Take off the final position, aka the target, which got highlighted above.
+        visible_array = np.array(self.engine.player.gamemap.visible, dtype=np.int8)
         for tp_x, tp_y in targeting_path[:-1]:
-            console.tiles_rgb["bg"][tp_x, tp_y] = colors.light_blue
-            console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
+            if visible_array[tp_x + 1, tp_y + 1]:  # Plus 1 to make the red start at the wall
+                console.tiles_rgb["bg"][tp_x, tp_y] = colors.light_blue
+                console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
+            else:
+                console.tiles_rgb["bg"][tp_x, tp_y] = colors.red
+                console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
 
     def on_index_selected(self, x: int, y: int) -> Optional[Action]:
         return self.callback((x, y))
