@@ -4,7 +4,7 @@ import traceback
 import tcod
 
 from components.tileset import tile_set
-import colors
+from components import colors
 import exceptions
 import input_handlers
 import setup_game

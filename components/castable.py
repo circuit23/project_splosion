@@ -3,13 +3,13 @@ from __future__ import annotations
 from typing import List, Optional, TYPE_CHECKING
 
 import actions
-import colors
+from components import colors
 import components.ai
 import components.spell_book
 from components.base_component import BaseComponent
 from components.spell_colors import SpellColor
 from exceptions import Impossible
-from input_handlers import AreaRangedAttackHandler, SingleRangedAttackHandler
+from input_handlers import SingleRangedAttackHandler
 
 if TYPE_CHECKING:
     from entity import Actor, Spell

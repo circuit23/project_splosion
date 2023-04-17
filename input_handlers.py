@@ -13,7 +13,7 @@ from actions import (
     PickupAction,
     WaitAction,
 )
-import colors
+from components import colors
 import exceptions
 
 

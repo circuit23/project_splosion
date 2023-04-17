@@ -3,7 +3,7 @@ import textwrap
 
 import tcod
 
-import colors
+from components import colors
 
 
 class Message:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import colors
+from components import colors
 from components.base_component import BaseComponent
 from render_order import RenderOrder
 

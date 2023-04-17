@@ -9,7 +9,7 @@ from typing import Optional
 
 import tcod
 
-import colors
+from components import colors
 import spell_factory
 from engine import Engine
 import entity_factories
