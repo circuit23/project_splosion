@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Optional, TYPE_CHECKING
 
+import color
 from components.base_component import BaseComponent
 
 if TYPE_CHECKING:
@@ -11,8 +12,14 @@ if TYPE_CHECKING:
 class SpellColor(BaseComponent):
     parent: Castable
 
-    def __init__(self, color: Optional[str] = None):
+    def __init__(self, color: Optional[color] = None):
         self.color = color
 
     def get_effect(self):
         raise NotImplementedError()
+
+
+class Red(SpellColor):
+    def __init__(self, color: color.red):
+        super().__init__(color=color)
+
