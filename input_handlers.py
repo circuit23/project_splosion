@@ -578,7 +578,7 @@ class SingleRangedAttackHandler(SelectIndexHandler):
         targeting_path = self.engine.player.ai.get_line_to(x, y)
         # Take off the final position, aka the target, which got highlighted above.
         for tp_x, tp_y in targeting_path[:-1]:
-            console.tiles_rgb["bg"][tp_x, tp_y] = colors.blue
+            console.tiles_rgb["bg"][tp_x, tp_y] = colors.light_blue
             console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
 
     def on_index_selected(self, x: int, y: int) -> Optional[Action]:
