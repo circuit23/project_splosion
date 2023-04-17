@@ -23,3 +23,4 @@ class Red(SpellColor):
     def __init__(self, color: colors.red):
         super().__init__(color=color)
 
+# TODO: add effects and more spell colors

@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import os
 
-from typing import Callable, Optional, Tuple, TYPE_CHECKING, Union
+from typing import Callable, List, Optional, Tuple, TYPE_CHECKING, Union
 
+import numpy as np
 import tcod
 
 import actions
@@ -567,6 +568,18 @@ class SingleRangedAttackHandler(SelectIndexHandler):
         super().__init__(engine)
 
         self.callback = callback
+
+    def on_render(self, console: tcod.Console) -> None:
+        """Highlight the path of tiles to the cursor's location."""
+        super().on_render(console)
+        x, y = self.engine.mouse_location
+        console.tiles_rgb["bg"][x, y] = colors.white
+        console.tiles_rgb["fg"][x, y] = colors.black
+        targeting_path = self.engine.player.ai.get_line_to(x, y)
+        # Take off the final position, aka the target, which got highlighted above.
+        for tp_x, tp_y in targeting_path[:-1]:
+            console.tiles_rgb["bg"][tp_x, tp_y] = colors.blue
+            console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
 
     def on_index_selected(self, x: int, y: int) -> Optional[Action]:
         return self.callback((x, y))
