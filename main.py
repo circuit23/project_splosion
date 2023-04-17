@@ -4,7 +4,7 @@ import traceback
 import tcod
 
 from components.tileset import tile_set
-import color
+import colors
 import exceptions
 import input_handlers
 import setup_game
@@ -56,7 +56,7 @@ def main() -> None:
                     # Then print the error to the message log.
                     if isinstance(handler, input_handlers.EventHandler):
                         handler.engine.message_log.add_message(
-                            traceback.format_exc(), color.error
+                            traceback.format_exc(), colors.error
                         )
         except exceptions.QuitWithoutSaving:
             raise

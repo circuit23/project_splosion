@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List, Optional, TYPE_CHECKING
 
 import actions
-import color
+import colors
 import components.ai
 import components.spell_book
 from components.base_component import BaseComponent
@@ -62,7 +62,7 @@ class BasicSpell(SpellStructure):
     """Basic colorless spell for initial testing."""
     def get_action(self, consumer: Actor) -> SingleRangedAttackHandler:
         self.engine.message_log.add_message(
-            "Oh shit, a spell. Select a target location.", color.needs_target
+            "Oh shit, a spell. Select a target location.", colors.needs_target
         )
         return SingleRangedAttackHandler(
             self.engine,
@@ -83,6 +83,6 @@ class BasicSpell(SpellStructure):
         self.engine.message_log.add_message(
             # TODO: make this message change based on what type of spell you're casting, etc
             f"Player sends a bolt of pure magic at the {target.name}, for {self.spell_power} damage.",
-            color.status_effect_applied
+            colors.status_effect_applied
         )
         target.fighter.hp -= self.spell_power

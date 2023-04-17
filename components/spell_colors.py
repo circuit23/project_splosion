@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional, TYPE_CHECKING
 
-import color
+import colors
 from components.base_component import BaseComponent
 
 if TYPE_CHECKING:
@@ -20,6 +20,6 @@ class SpellColor(BaseComponent):
 
 
 class Red(SpellColor):
-    def __init__(self, color: color.red):
+    def __init__(self, color: colors.red):
         super().__init__(color=color)
 

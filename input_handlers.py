@@ -13,7 +13,7 @@ from actions import (
     PickupAction,
     WaitAction,
 )
-import color
+import colors
 import exceptions
 
 
@@ -106,8 +106,8 @@ class PopupMessage(BaseEventHandler):
             console.width // 2,
             console.height // 2,
             self.text,
-            fg=color.white,
-            bg=color.black,
+            fg=colors.white,
+            bg=colors.black,
             alignment=tcod.CENTER,
         )
 
@@ -146,7 +146,7 @@ class EventHandler(BaseEventHandler):
         try:
             action.perform()
         except exceptions.Impossible as exc:
-            self.engine.message_log.add_message(exc.args[0], color.impossible)
+            self.engine.message_log.add_message(exc.args[0], colors.impossible)
             return False  # Skip enemy turn on exceptions
 
         self.engine.handle_enemy_turns()
@@ -291,7 +291,7 @@ class LevelUpEventHandler(AskUserEventHandler):
             else:
                 player.level.increase_defense()
         else:
-            self.engine.message_log.add_message("Invalid entry.", color.invalid)
+            self.engine.message_log.add_message("Invalid entry.", colors.invalid)
 
             return None
 
@@ -370,7 +370,7 @@ class InventoryEventHandler(AskUserEventHandler):
             try:
                 selected_item = player.inventory.items[index]
             except IndexError:
-                self.engine.message_log.add_message("Invalid entry.", color.invalid)
+                self.engine.message_log.add_message("Invalid entry.", colors.invalid)
                 return None
             return self.on_item_selected(selected_item)
         return super().ev_keydown(event)
@@ -466,7 +466,7 @@ class SpellbookEventHandler(AskUserEventHandler):
             try:
                 selected_spell = player.spell_book.spells[index]
             except IndexError:
-                self.engine.message_log.add_message("Invalid entry.", color.invalid)
+                self.engine.message_log.add_message("Invalid entry.", colors.invalid)
                 return None
             return self.on_spell_selected(selected_spell)
         return super().ev_keydown(event)
@@ -510,8 +510,8 @@ class SelectIndexHandler(AskUserEventHandler):
         """Highlight the tile under the cursor."""
         super().on_render(console)
         x, y = self.engine.mouse_location
-        console.tiles_rgb["bg"][x, y] = color.white
-        console.tiles_rgb["fg"][x, y] = color.black
+        console.tiles_rgb["bg"][x, y] = colors.white
+        console.tiles_rgb["fg"][x, y] = colors.black
 
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[ActionOrHandler]:
         """Check for key movement or confirmation keys."""
@@ -598,7 +598,7 @@ class AreaRangedAttackHandler(SelectIndexHandler):
             y=y - self.radius - 1,
             width=self.radius ** 2,
             height=self.radius ** 2,
-            fg=color.red,
+            fg=colors.red,
             clear=False,
         )
 
@@ -676,7 +676,7 @@ class ArenaEventHandler(MainGameEventHandler):
         try:
             action.perform()
         except exceptions.Impossible as exc:
-            self.engine.message_log.add_message(exc.args[0], color.impossible)
+            self.engine.message_log.add_message(exc.args[0], colors.impossible)
             return False  # Skip enemy turn on exceptions
 
         self.engine.handle_enemy_turns()

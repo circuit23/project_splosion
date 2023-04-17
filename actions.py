@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional, Tuple, TYPE_CHECKING, Union
 
-import color
+import colors
 import exceptions
 
 if TYPE_CHECKING:
@@ -135,7 +135,7 @@ class TakeStairsAction(Action):
         if (self.entity.x, self.entity.y) == self.engine.game_map.downstairs_location:
             self.engine.game_world.generate_floor()
             self.engine.message_log.add_message(
-                "You descend down the staircase.", color.descend
+                "You descend down the staircase.", colors.descend
             )
         else:
             raise exceptions.Impossible("There are no stairs here.")
@@ -177,9 +177,9 @@ class MeleeAction(ActionWithDirection):
 
         attack_desc = f"{self.entity.name.capitalize()} attacks {target.name}"
         if self.entity is self.engine.player:
-            attack_color = color.player_atk
+            attack_color = colors.player_atk
         else:
-            attack_color = color.enemy_atk
+            attack_color = colors.enemy_atk
 
         if damage > 0:
             self.engine.message_log.add_message(

@@ -9,7 +9,7 @@ from typing import Optional
 
 import tcod
 
-import color
+import colors
 import spell_factory
 from engine import Engine
 import entity_factories
@@ -50,7 +50,7 @@ def arena_game() -> Engine:
     engine.update_fov(fov_radius)
 
     engine.message_log.add_message(
-        "Welcome to the Arena! Prepare to die in a splosion!!", color.welcome_text
+        "Welcome to the Arena! Prepare to die in a splosion!!", colors.welcome_text
     )
 
     dagger = copy.deepcopy(entity_factories.dagger)
@@ -98,7 +98,7 @@ def new_game() -> Engine:
     engine.update_fov()
 
     engine.message_log.add_message(
-        "Hello and welcome, adventurer, to yet another dungeon!", color.welcome_text
+        "Hello and welcome, adventurer, to yet another dungeon!", colors.welcome_text
     )
 
     dagger = copy.deepcopy(entity_factories.dagger)
@@ -140,14 +140,14 @@ class MainMenu(input_handlers.BaseEventHandler):
             console.width // 4 * 3,
             console.height // 2 - 20,
             "PROJECT SPLOSION!",
-            fg=color.menu_title,
+            fg=colors.menu_title,
             alignment=tcod.CENTER,
         )
         console.print(
             console.width - 8,
             console.height - 2,
             "By Circuit 23",
-            fg=color.menu_title,
+            fg=colors.menu_title,
             alignment=tcod.CENTER,
         )
 
@@ -159,8 +159,8 @@ class MainMenu(input_handlers.BaseEventHandler):
                 console.width // 4 * 3,
                 console.height // 2 - 18 + i,
                 text.ljust(menu_width),
-                fg=color.menu_text,
-                bg=color.black,
+                fg=colors.menu_text,
+                bg=colors.black,
                 alignment=tcod.CENTER,
                 bg_blend=tcod.BKGND_ALPHA(64),
             )
