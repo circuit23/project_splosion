@@ -578,17 +578,18 @@ class SingleRangedAttackHandler(SelectIndexHandler):
         targeting_path = self.engine.player.ai.get_line_to(x, y)
         # Take off the final position, aka the target, which got highlighted above.
         visible_array = np.array(self.engine.player.gamemap.visible, dtype=np.int8)
-        for tp_x, tp_y in targeting_path[:-1]:
-            if (
-                    visible_array[tp_x, tp_y]
-                    and self.engine.game_map.in_bounds(tp_x, tp_y)
-                    and not self.engine.game_map.get_blocking_entity_at_location(tp_x, tp_y)
-            ):
-                console.tiles_rgb["bg"][tp_x, tp_y] = colors.light_blue
+        target_path_color = colors.light_blue
+        for tp_x, tp_y in targeting_path[1:-1]:
+            if self.engine.game_map.in_bounds(tp_x, tp_y):  # If out of bounds, don't even evaluate
+                if (
+                        not visible_array[tp_x, tp_y]
+                        or self.engine.game_map.get_blocking_entity_at_location(tp_x, tp_y)
+                ):
+                    target_path_color = colors.red
+                console.tiles_rgb["bg"][tp_x, tp_y] = target_path_color
                 console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
             else:
-                console.tiles_rgb["bg"][tp_x, tp_y] = colors.red
-                console.tiles_rgb["fg"][tp_x, tp_y] = colors.white
+                pass
 
     def on_index_selected(self, x: int, y: int) -> Optional[Action]:
         return self.callback((x, y))
