@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import numpy as np
 import traceback
 
 import tcod
@@ -26,24 +27,32 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
 
 
 def main() -> None:
-    screen_width = 80
-    screen_height = 50
+    # screen_width = 80
+    # screen_height = 50
 
     tileset = tile_set()
+    CP437_TO_UNICODE = np.asarray(tcod.tileset.CHARMAP_CP437)
+    root_console, = tcod.console.load_xp("Project_Splosion_80x50.xp", order="F")
+    root_console.ch[:] = CP437_TO_UNICODE[root_console.ch]
+    KEY_COLOR = (255, 0, 255)
+    is_transparent = (root_console.rgb["bg"] == KEY_COLOR).all(axis=-1)
+    root_console.rgba[is_transparent] = (ord(" "), (0,), (0,))
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 
     with tcod.context.new_terminal(
-        screen_width,
-        screen_height,
+        # screen_width,
+        # screen_height,
+        root_console.width,
+        root_console.height,
         tileset=tileset,
         title="PROJECT SPLOSION!",
         vsync=True,
     ) as context:
-        root_console = tcod.Console(screen_width, screen_height, order="F")
+        # root_console = tcod.Console(screen_width, screen_height, order="F")
         try:
             while True:
-                root_console.clear()
+                # root_console.clear()
                 handler.on_render(console=root_console)
                 context.present(root_console)
 
