@@ -9,15 +9,12 @@ from typing import Optional
 
 import tcod
 
-from components import colors
-import spell_factory
-from engine import Engine
 import entity_factories
-from game_map import GameWorld
 import input_handlers
-
-# Load the background image and remove the alpha channel.
-background_image = tcod.image.load("Project_Splosion_small.png")[:, :, :3]
+import spell_factory
+from components import colors
+from engine import Engine
+from game_map import GameWorld
 
 
 def arena_game() -> Engine:
@@ -105,7 +102,6 @@ def new_game() -> Engine:
     leather_armor = copy.deepcopy(entity_factories.leather_armor)
     basic_spell = copy.deepcopy(spell_factory.basic_spell)
 
-
     dagger.parent = player.inventory
     leather_armor.parent = player.inventory
     basic_spell.parent = player.spell_book
@@ -133,8 +129,7 @@ class MainMenu(input_handlers.BaseEventHandler):
     """Handle the main menu rendering and input."""
 
     def on_render(self, console: tcod.Console) -> None:
-        """Render the main menu on a background image."""
-        # console.draw_semigraphics(background_image, 0, 0)
+        """Render the main menu over the REXPaint console (already loaded)."""
 
         console.print(
             console.width // 4 * 3,
@@ -153,7 +148,7 @@ class MainMenu(input_handlers.BaseEventHandler):
 
         menu_width = 24
         for i, text in enumerate(
-            ["[N] Play a new game", "[C] Continue last game", "[A] Arena for testing", "[Q] Quit"]
+                ["[N] Play a new game", "[C] Continue last game", "[A] Arena for testing", "[Q] Quit"]
         ):
             console.print(
                 console.width // 4 * 3,
