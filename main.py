@@ -20,16 +20,12 @@ def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
 # TODO: create an item factory system similar to entity_factory
 # TODO: create an ELABORATE spell factory system similar to entity_factory, with colors, etc
 # TODO: once some spells are working, start ASCII animations
-# TODO: figure out how to make the loading screen look like it really looks full-size
 # TODO: give the Arena its own savegame so it doesn't keep overwriting the other one
 # TODO: make the console area resizable like in the scratch example
 # TODO: bigger, scrollable/lookable GameMaps
 
 
 def main() -> None:
-    # screen_width = 80
-    # screen_height = 50
-
     tileset = tile_set()
     CP437_TO_UNICODE = np.asarray(tcod.tileset.CHARMAP_CP437)
     root_console, = tcod.console.load_xp("Project_Splosion_80x50.xp", order="F")
@@ -41,15 +37,12 @@ def main() -> None:
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
 
     with tcod.context.new_terminal(
-        # screen_width,
-        # screen_height,
         root_console.width,
         root_console.height,
         tileset=tileset,
         title="PROJECT SPLOSION!",
         vsync=True,
     ) as context:
-        # root_console = tcod.Console(screen_width, screen_height, order="F")
         try:
             while True:
                 # root_console.clear()

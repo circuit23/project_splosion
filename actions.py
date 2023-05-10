@@ -104,6 +104,7 @@ class RemoveSpell(SpellAction):
     def perform(self) -> None:
         self.entity.spell_book.remove(self.spell)
 
+
 class DropItem(ItemAction):
     def perform(self) -> None:
         if self.entity.equipment.item_is_equipped(self.item):
